@@ -31,7 +31,7 @@ const items = [
 
 export default function Services() {
   return (
-    <div className="flex justify-center pt-14 pb-22 relative overflow-hidden">
+    <div className="flex justify-center pt-14 pb-22 relative overflow-hidden bg-white">
       <img
         src="/images/serv-5.png"
         alt="serv-5"
@@ -45,11 +45,14 @@ export default function Services() {
           descText="نقدم لك مجموعة متكاملة من الخدمات لضمان وصولك لأفضل النتائج بأسرع وقت وبطريقة صحية وآمنة"
         />
         <div
-          className="grid gap-6 
-                      grid-cols-1 
-                      sm:grid-cols-2 
-                      lg:grid-cols-4 
-                      max-w-6xl"
+          className="
+            grid gap-6 
+            grid-cols-1 
+            sm:grid-cols-2 
+            lg:grid-cols-4 
+            max-w-6xl
+            mx-auto
+          "
         >
           {items.map((item, idx) => (
             <div
@@ -71,11 +74,7 @@ export default function Services() {
               >
                 {item.title}
               </h3>
-              <p
-                style={{ color: "rgba(77, 77, 77, 1)" }}
-              >
-                {item.description}
-              </p>
+              <p style={{ color: "rgba(77, 77, 77, 1)" }}>{item.description}</p>
             </div>
           ))}
         </div>

@@ -30,7 +30,7 @@ export default function Hero() {
             }}
           >
             <span>ابدأ رحلتك دلوقتي!</span>
-            <img src="/images/rocket.png" alt="Rocket" className="w-5" />
+            <img src="/images/rocket.svg" alt="Rocket" className="w-5" />
           </div>
           <p
             className="text-white text-3xl md:text-4xl xl:text-5xl font-bold mb-4 mx-auto xl:mx-0 max-w-140 xl:max-w-180"

@@ -20,7 +20,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50">
+    <header
+      className={`sticky top-0 z-50 transition-shadow duration-300 ${
+        isScrolled ? "shadow-xl" : "shadow-none"
+      }`}
+    >
       {/* Background layer */}
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${
