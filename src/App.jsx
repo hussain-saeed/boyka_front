@@ -23,6 +23,12 @@ function App() {
         <Services />
         <Video />
         <Who />
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+          quod distinctio aut illum recusandae vitae enim sit cumque qui nihil
+          magnam tempore eligendi adipisci iusto quasi porro velit, est
+          excepturi?
+        </div>
         <Packages />
         <Faq />
         <Footer />

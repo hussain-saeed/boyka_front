@@ -13,7 +13,8 @@ export function PackagesProvider({ children }) {
     setPackagesIsLoading(true);
     setErrorFetchingPackages(false);
 
-    fetch(`${BASE_URL}/api/packages`)
+    {
+      fetch(`${BASE_URL}/api/packages`)
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
@@ -28,6 +29,7 @@ export function PackagesProvider({ children }) {
       .finally(() => {
         setPackagesIsLoading(false);
       });
+    }
   }, []);
 
   return (

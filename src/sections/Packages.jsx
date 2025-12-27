@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { usePackages } from "../context/packages-context";
 import PackagePopup from "./PackagePopup";
+import Container from "../components/Container";
+import SectionHead from "../components/SectionHead";
+import Loader from "../components/Loader";
+import Button from "../components/Button";
+import Arrow from "../components/Arrow";
+import { IoMdCheckmark } from "react-icons/io";
 
 export default function Packages() {
   const { packagesIsLoading, packages, errorFetchingPackages } = usePackages();
@@ -14,104 +20,164 @@ export default function Packages() {
     }));
   };
 
-  if (packagesIsLoading) return <p>Loading...</p>;
-  if (errorFetchingPackages) return <p>حدث خطأ أثناء جلب الباقات ههه</p>;
-  if (!packages || packages.length === 0)
-    return <p>لا توجد باكدجات متاحة حاليا</p>;
+  let content;
+
+  if (packagesIsLoading) {
+    content = <Loader />;
+  } else if (errorFetchingPackages) {
+    content = <p>حدث خطأ أثناء جلب الباقات</p>;
+  } else if (!packages || packages.length === 0) {
+    content = <p>لا توجد باكدجات متاحة حاليا</p>;
+  } else {
+    content = (
+      <>
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-20">
+          {packages.map((pkg, index) => {
+            const isSpecial = index % 3 === 1;
+            const selectedMonth = selectedMonths[pkg.id] || 1;
+
+            return (
+              <div
+                key={pkg.id}
+                className={`package-box px-5 pt-8 pb-9 rounded-4xl shadow-md transition-transform ${
+                  isSpecial ? "xl:-translate-y-7" : ""
+                }`}
+                style={{
+                  border: isSpecial
+                    ? "none"
+                    : "1px solid rgba(230, 230, 230, 1)",
+                  boxShadow: "0px 4px 100px 0px rgba(0, 0, 0, 0.1)",
+                  background: isSpecial
+                    ? "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(230, 255, 117, 1) 179.83%)"
+                    : "white",
+                }}
+              >
+                <h2 className="text-3xl font-semibold mb-1.5">{pkg.name}</h2>
+                <p
+                  style={{ color: "rgba(102, 102, 102, 1)" }}
+                  className="text-lg font-normal mb-8"
+                >
+                  {pkg.short_description}
+                </p>
+
+                <div className="mb-5">
+                  {selectedMonth === 1 && (
+                    <div>
+                      <p className="font-bold text-2xl">
+                        {pkg.one_month_price_after_discount} جنيه
+                      </p>
+                      <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                        {pkg.one_month_price_before_discount} جنيه
+                      </p>
+                    </div>
+                  )}
+                  {selectedMonth === 6 && (
+                    <div>
+                      <p className="font-bold text-2xl">
+                        {pkg.six_month_price_after_discount} جنيه
+                      </p>
+                      <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                        {pkg.six_month_price_before_discount} جنيه
+                      </p>
+                    </div>
+                  )}
+                  {selectedMonth === 12 && (
+                    <div>
+                      <p className="font-bold text-2xl">
+                        {pkg.twelve_month_price_after_discount} جنيه
+                      </p>
+                      <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                        {pkg.twelve_month_price_before_discount} جنيه
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex gap-2 my-2 mb-12">
+                  {[1, 6, 12].map((month) => (
+                    <button
+                      key={month}
+                      className={`pr-4 pl-4.5 pt-0.5 pb-2 rounded-lg ${
+                        selectedMonth !== month ? "hover:bg-[#def867b0]" : ""
+                      }`}
+                      style={{
+                        border:
+                          selectedMonth !== month
+                            ? "1px solid rgba(204, 204, 204, 1)"
+                            : "",
+                        background:
+                          selectedMonth === month ? "var(--color-primary)" : "",
+                        cursor: selectedMonth === month ? "" : "pointer",
+                      }}
+                      onClick={() => handleMonthChange(pkg.id, month)}
+                    >
+                      {month === 1 ? "شهر" : month === 6 ? "6 شهور" : "12 شهر"}
+                    </button>
+                  ))}
+                </div>
+
+                <Button
+                  text="الإشتراك فى الباقة"
+                  leftComponent={<Arrow backgroundColor={"white"} />}
+                  onClick={() =>
+                    setSelectedPackage({
+                      ...pkg,
+                      selectedMonth,
+                    })
+                  }
+                  className="py-4 font-bold w-full text-white text-lg gap-3"
+                  style={{ backgroundColor: "black" }}
+                />
+
+                <ul className="space-y-3 mt-10 pl-2">
+                  {pkg.descriptions.map((desc, idx) => (
+                    <li key={idx} className="flex gap-2 items-start">
+                      <div
+                        className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
+                        style={{
+                          backgroundColor: "var(--color-primary)",
+                          color: "white",
+                        }}
+                      >
+                        <IoMdCheckmark />
+                      </div>
+                      <span className="font-semibold text-xl">{desc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        <PackagePopup
+          pkg={selectedPackage}
+          onClose={() => setSelectedPackage(null)}
+        />
+      </>
+    );
+  }
 
   return (
-    <>
-      <div className="packages-container grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {packages.map((pkg, index) => {
-          const isSpecial = index % 3 === 1;
-          const selectedMonth = selectedMonths[pkg.id] || 1;
-
-          return (
-            <div
-              key={pkg.id}
-              className={`package-box p-4 rounded-lg shadow-md transition-transform ${
-                isSpecial ? "bg-red-300 lg:-translate-y-6" : "bg-gray-100"
-              }`}
-            >
-              <h2 className="text-lg font-bold">{pkg.name}</h2>
-              <p className="text-gray-600">{pkg.short_description}</p>
-
-              <div className="month-selector flex gap-2 my-2">
-                {[1, 6, 12].map((month) => (
-                  <button
-                    key={month}
-                    className={`px-3 py-1 rounded ${
-                      selectedMonth === month
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200"
-                    }`}
-                    onClick={() => handleMonthChange(pkg.id, month)}
-                  >
-                    {month}{" "}
-                    {month === 1 ? "شهر" : month === 6 ? "6 شهور" : "12 شهر"}
-                  </button>
-                ))}
-              </div>
-
-              <div className="prices my-2">
-                {selectedMonth === 1 && (
-                  <div>
-                    <p className="line-through text-gray-500">
-                      {pkg.one_month_price_before_discount} ج.م
-                    </p>
-                    <p className="text-green-600 font-bold">
-                      {pkg.one_month_price_after_discount} ج.م
-                    </p>
-                  </div>
-                )}
-                {selectedMonth === 6 && (
-                  <div>
-                    <p className="line-through text-gray-500">
-                      {pkg.six_month_price_before_discount} ج.م
-                    </p>
-                    <p className="text-green-600 font-bold">
-                      {pkg.six_month_price_after_discount} ج.م
-                    </p>
-                  </div>
-                )}
-                {selectedMonth === 12 && (
-                  <div>
-                    <p className="line-through text-gray-500">
-                      {pkg.twelve_month_price_before_discount} ج.م
-                    </p>
-                    <p className="text-green-600 font-bold">
-                      {pkg.twelve_month_price_after_discount} ج.م
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <ul className="descriptions list-disc pl-5 my-2">
-                {pkg.descriptions.map((desc, idx) => (
-                  <li key={idx}>{desc}</li>
-                ))}
-              </ul>
-
-              <button
-                className="subscribe-btn mt-2 w-full bg-blue-600 text-white py-2 rounded"
-                onClick={() =>
-                  setSelectedPackage({
-                    ...pkg,
-                    selectedMonth,
-                  })
-                }
-              >
-                اشترك في الباقة
-              </button>
-            </div>
-          );
-        })}
+    <div className="pt-14 pb-22 overflow-hidden relative min-h-130 bg-white z-0">
+      <div className="absolute inset-0 -z-10 pointer-events-none scale-105">
+        <img
+          src="/images/lines.png"
+          alt="lines"
+          className="w-full h-full object-fill opacity-60"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-white/50 via-white/20 to-white/5" />
       </div>
 
-      <PackagePopup
-        pkg={selectedPackage}
-        onClose={() => setSelectedPackage(null)}
-      />
-    </>
+      <Container className="relative z-10">
+        <SectionHead
+          titleColor="rgba(26, 26, 26, 1)"
+          titleText="باقات الاشتراك"
+          descColor="rgba(96, 96, 96, 1)"
+          descText="اختر الباقة المناسبة لهدفك وميزانيتك"
+        />
+        {content}
+      </Container>
+    </div>
   );
 }

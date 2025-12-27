@@ -23,12 +23,10 @@ export default function Who() {
   return (
     <section
       className="w-full pt-14 pb-18 relative overflow-hidden"
-      style={
-        {
-          background:
+      style={{
+        background:
           "linear-gradient(224deg, rgb(255, 255, 255) 60%, #f5ffb8 100%)",
-        }
-      }
+      }}
     >
       <img
         src="/images/serv-5.png"
@@ -92,7 +90,7 @@ export default function Who() {
           </div>
 
           {/* الصورة */}
-          <div className="flex-shrink-0">
+          <div className="shrink">
             <img
               src="/images/who-5.png"
               alt="youssef"
