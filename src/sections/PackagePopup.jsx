@@ -5,7 +5,7 @@ import Container from "../components/Container";
 import { IoMdCheckmark } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import { FaWhatsapp } from "react-icons/fa";
 import { CiMobile1 } from "react-icons/ci";
 import { IoMdCloseCircleOutline } from "react-icons/io";
@@ -146,6 +146,9 @@ export default function PackagePopup({ pkg, onClose }) {
         showToast("تم بنجاح! سيتم التواصل معك قريبا");
         resetForm();
         onClose();
+        window.lenis.scrollTo(0, {
+          duration: 0.5,
+        });
       } else {
         showToast("حدث خطأ غير متوقع!");
       }

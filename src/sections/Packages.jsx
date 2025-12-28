@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import Button from "../components/Button";
 import Arrow from "../components/Arrow";
 import { IoMdCheckmark } from "react-icons/io";
+import Lenis from "@studio-freight/lenis";
 
 export default function Packages({ onSelectPackage }) {
   const { packagesIsLoading, packages, errorFetchingPackages } = usePackages();
@@ -114,12 +115,15 @@ export default function Packages({ onSelectPackage }) {
               <Button
                 text="الإشتراك فى الباقة"
                 leftComponent={<Arrow backgroundColor={"white"} />}
-                onClick={() =>
+                onClick={() => {
                   onSelectPackage({
                     ...pkg,
                     selectedMonth,
-                  })
-                }
+                  });
+                  window.lenis.scrollTo(0, {
+                    duration: 0.5,
+                  });
+                }}
                 className="py-4 font-bold w-full text-white text-lg gap-3"
                 style={{ backgroundColor: "black" }}
               />

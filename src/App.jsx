@@ -10,9 +10,35 @@ import Services from "./sections/Services";
 import Video from "./sections/Video";
 import Who from "./sections/Who";
 import PackagePopup from "./sections/PackagePopup";
+import Lenis from "@studio-freight/lenis";
+import { useEffect } from "react";
 
 function App() {
   const [selectedPackage, setSelectedPackage] = useState(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 2,
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    window.lenis = lenis;
+
+    return () => lenis.destroy();
+  }, []);
+
+  useEffect(() => {
+    window.lenis.scrollTo(0, {
+      duration: 0.5,
+    });
+  }, []);
 
   return (
     <PackagesProvider>
