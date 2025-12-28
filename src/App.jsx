@@ -54,22 +54,23 @@ function App() {
         ) : (
           // لو مفيش باقة مختارة، اعرض المحتوى العادي
           <>
-            <Hero />
+            <Hero /> // واخد id main
             <img
               src="/images/hero-right-ellipse.png"
               alt="hero-right-ellipse"
               className="absolute -top-30 -right-30 lg:-top-100 lg:-right-120 z-0"
             />
-            <Services />
+            <Services /> // واخد id services
             <Video />
             <Who />
-            <div>
+            <div id="transformations">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
               quod distinctio aut illum recusandae vitae enim sit cumque qui
               nihil magnam tempore eligendi adipisci iusto quasi porro velit,
               est excepturi?
             </div>
-            <Packages onSelectPackage={setSelectedPackage} />
+            <Packages onSelectPackage={setSelectedPackage} /> // واخد id
+            packages
             <Faq />
           </>
         )}

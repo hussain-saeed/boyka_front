@@ -7,6 +7,7 @@ import Arrow from "../components/arrow.jsx";
 export default function Hero() {
   return (
     <section
+      id="main"
       className=""
       style={{
         backgroundColor: "var(--color-bg)",

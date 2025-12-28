@@ -31,7 +31,10 @@ const items = [
 
 export default function Services() {
   return (
-    <div className="flex justify-center pt-14 pb-22 relative overflow-hidden bg-white">
+    <div
+      id="services"
+      className="flex justify-center pt-14 pb-22 relative overflow-hidden bg-white"
+    >
       <img
         src="/images/serv-5.png"
         alt="serv-5"

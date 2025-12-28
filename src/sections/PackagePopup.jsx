@@ -386,7 +386,7 @@ export default function PackagePopup({ pkg, onClose }) {
                   </div>
 
                   {/* رقم الواتساب */}
-                  <div className="w-full sm:w-[50%] flex flex-col">
+                  <div className="w-full sm:w-[70%] md:w-[75%] lg:w-[65%] flex flex-col">
                     <label className="block mb-1.5 text-sm font-semibold text-right">
                       رقم الواتساب
                       <span className="text-red-500 mr-0.5">*</span>
@@ -451,7 +451,7 @@ export default function PackagePopup({ pkg, onClose }) {
                   </div>
 
                   {/* رقم المكالمات */}
-                  <div className="w-full sm:w-[50%] flex flex-col">
+                  <div className="w-full sm:w-[70%] md:w-[75%] lg:w-[65%] flex flex-col">
                     <label className="block mb-1.5 text-sm font-semibold text-right">
                       رقم المكالمات
                       <span className="text-red-500 mr-0.5">*</span>

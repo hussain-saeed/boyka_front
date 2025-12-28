@@ -153,6 +153,7 @@ export default function Packages({ onSelectPackage }) {
 
   return (
     <div
+      id="packages"
       className="pt-14 pb-22 overflow-hidden min-h-130 bg-white"
       style={{
         backgroundImage: `
