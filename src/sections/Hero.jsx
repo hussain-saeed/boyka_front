@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className=""
+      className="min-h-166.25 flex items-end"
       style={{
         backgroundColor: "var(--color-bg)",
         position: "relative",
