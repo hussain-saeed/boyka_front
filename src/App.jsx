@@ -12,6 +12,7 @@ import Who from "./sections/Who";
 import PackagePopup from "./sections/PackagePopup";
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
+import Transformations from "./sections/Transformations";
 
 function App() {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -63,12 +64,7 @@ function App() {
             <Services /> {/* واخد id services */}
             <Video />
             <Who />
-            <div id="transformations">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-              quod distinctio aut illum recusandae vitae enim sit cumque qui
-              nihil magnam tempore eligendi adipisci iusto quasi porro velit,
-              est excepturi?
-            </div>
+            <Transformations />
             {/* واخد id packages*/}
             <Packages onSelectPackage={setSelectedPackage} />
             <Faq />
