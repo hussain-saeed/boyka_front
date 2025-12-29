@@ -55,7 +55,7 @@ function App() {
         <div
           style={{ backgroundColor: "var(--color-bg)", position: "relative" }}
         >
-          <Header />
+          <Header selectedPackage={selectedPackage} />
 
           {/* لو فيه باقة مختارة، اعرض PackagePopup بس */}
           {selectedPackage ? (

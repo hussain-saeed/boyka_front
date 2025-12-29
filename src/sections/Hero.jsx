@@ -7,7 +7,7 @@ import Arrow from "../components/arrow.jsx";
 export default function Hero() {
   return (
     <section
-      id="main"
+      id="home"
       className=""
       style={{
         backgroundColor: "var(--color-bg)",
@@ -55,7 +55,26 @@ export default function Hero() {
               leftComponent={
                 <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
               }
-              className="text-black w-53 py-4 font-bold"
+              className="text-black w-53 py-4 font-bold hidden lg:flex"
+              onClick={() =>
+                window.lenis.scrollTo(`#packages`, {
+                  duration: 1,
+                  offset: -86,
+                })
+              }
+            />
+            <Button
+              text="احجز باقتك الان"
+              leftComponent={
+                <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
+              }
+              className="text-black w-53 py-4 font-bold flex lg:hidden"
+              onClick={() =>
+                window.lenis.scrollTo(`#packages`, {
+                  duration: 1,
+                  offset: -62,
+                })
+              }
             />
             <Button
               text="استفسر علي الواتساب"

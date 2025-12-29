@@ -5,9 +5,14 @@ import Button from "./Button";
 import Arrow from "./arrow";
 import { BiBorderRadius } from "react-icons/bi";
 
-export default function Header() {
+export default function Header({ selectedPackage }) {
   const [open, setOpen] = useState(false);
-  const navLinks = ["الرئيسية", "الباقات", "التحولات", "الخدمات"];
+  const navLinks = [
+    { label: "الرئيسية", id: "home" },
+    { label: "الخدمات", id: "services" },
+    { label: "التحولات", id: "transformations" },
+    { label: "الباقات", id: "packages" },
+  ];
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -47,10 +52,11 @@ export default function Header() {
           <div className="flex items-center flex-row-reverse lg:flex-row justify-between py-4">
             {/* Logo */}
             <div
-              className="text-2xl"
+              className="text-2xl cursor-pointer"
               style={{
                 fontFamily: "Bruno Ace SC",
               }}
+              onClick={() => window.location.reload()}
             >
               <span style={{ color: isScrolled ? "" : "#ffffff" }}>Bo</span>
               <span
@@ -65,29 +71,57 @@ export default function Header() {
             </div>
 
             {/* Nav links - desktop */}
-            <nav className="hidden lg:flex items-center gap-12">
-              {navLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="font-medium transition-all duration-300"
-                  style={{ color: isScrolled ? "" : "white" }}
-                >
-                  {link}
-                </a>
-              ))}
-            </nav>
+            {selectedPackage ? (
+              ""
+            ) : (
+              <nav className="hidden lg:flex items-center gap-12">
+                {navLinks.map((link) => (
+                  <div
+                    key={link.label}
+                    onClick={() =>
+                      window.lenis.scrollTo(`#${link.id}`, {
+                        duration: 1,
+                        offset: -86,
+                      })
+                    }
+                    className="font-medium transition-all duration-300 cursor-pointer"
+                    style={{ color: isScrolled ? "" : "white" }}
+                  >
+                    {link.label}
+                  </div>
+                ))}
+              </nav>
+            )}
 
             {/* Button - desktop */}
-            <div className="hidden lg:block">
-              <Button
-                text="اشترك الآن"
-                leftComponent={
-                  <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
-                }
-                className="text-black w-44 py-3.5 font-bold"
-              />
-            </div>
+            {selectedPackage ? (
+              <div className="hidden lg:block">
+                <Button
+                  text="العودة للرئيسية"
+                  leftComponent={
+                    <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
+                  }
+                  className="text-black w-44 py-3.5 font-bold"
+                  onClick={() => window.location.reload()}
+                />
+              </div>
+            ) : (
+              <div className="hidden lg:block">
+                <Button
+                  text="اشترك الآن"
+                  leftComponent={
+                    <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
+                  }
+                  className="text-black w-44 py-3.5 font-bold"
+                  onClick={() =>
+                    window.lenis.scrollTo(`#packages`, {
+                      duration: 1,
+                      offset: -86,
+                    })
+                  }
+                />
+              </div>
+            )}
 
             {/* Burger icon */}
             <button
@@ -107,25 +141,58 @@ export default function Header() {
           `}
           >
             <nav className="flex flex-col gap-6 py-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="font-medium transition-all duration-300"
-                  style={{ color: isScrolled ? "" : "white" }}
-                >
-                  {link}
-                </a>
-              ))}
+              {selectedPackage ? (
+                ""
+              ) : (
+                <>
+                  {navLinks.map((link) => (
+                    <div
+                      key={link.label}
+                      onClick={() => {
+                        window.lenis.scrollTo(`#${link.id}`, {
+                          duration: 1,
+                          offset: -357.5,
+                        });
+                        setOpen(!open);
+                      }}
+                      className="font-medium transition-all duration-300"
+                      style={{ color: isScrolled ? "" : "white" }}
+                    >
+                      {link.label}
+                    </div>
+                  ))}
+                </>
+              )}
 
-              <Button
-                text="اشترك الآن"
-                leftComponent={
-                  <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
-                }
-                className="text-black w-full sm:w-60 py-3.5 font-medium"
-                style={{ borderRadius: "0.4rem" }}
-              />
+              {selectedPackage ? (
+                <Button
+                  text="العودة للرئيسية"
+                  leftComponent={
+                    <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
+                  }
+                  className="text-black w-full sm:w-60 py-3.5 font-medium"
+                  style={{ borderRadius: "0.4rem" }}
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                />
+              ) : (
+                <Button
+                  text="اشترك الآن"
+                  leftComponent={
+                    <Arrow backgroundColor={"rgba(255, 255, 255, 0.75)"} />
+                  }
+                  className="text-black w-full sm:w-60 py-3.5 font-medium"
+                  style={{ borderRadius: "0.4rem" }}
+                  onClick={() => {
+                    window.lenis.scrollTo(`#packages`, {
+                      duration: 1,
+                      offset: -355,
+                    });
+                    setOpen(!open);
+                  }}
+                />
+              )}
             </nav>
           </div>
         </Container>
