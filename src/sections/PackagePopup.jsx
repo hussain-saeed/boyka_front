@@ -256,7 +256,7 @@ export default function PackagePopup({ pkg }) {
   // ======== الـ JSX ========
   return (
     <div
-      className="pt-8 pb-9 xl:pt-20 xl:pb-24 bg-white"
+      className="pt-8 pb-9 lg:pt-20 lg:pb-32 bg-white min-h-screen flex items-center"
       style={{
         backgroundImage: `
           linear-gradient(
@@ -279,12 +279,7 @@ export default function PackagePopup({ pkg }) {
       <Container>
         <div className="relative w-full xl:w-[85%] mx-auto">
           <div className="relative bg-white rounded-3xl p-8 z-10 w-full shadow-2xl">
-            <MotionDiv
-              variant="scaleFade"
-              overrideProps={{
-                viewport: { once: false },
-              }}
-            >
+            <MotionDiv variant="slideXLeft">
               {/* العنوان */}
               <h2 className="font-semibold text-xl mb-1.5">بيانات الاشتراك</h2>
               <p
@@ -297,14 +292,9 @@ export default function PackagePopup({ pkg }) {
 
             <div className="flex gap-8 lg:flex-row flex-col">
               {/* ======== قسم عرض تفاصيل الباقة ======== */}
-              <MotionDiv
-                variant="scaleFade"
-                overrideProps={{
-                  viewport: { once: false },
-                }}
-              >
+              <MotionDiv variant="slideXLeft">
                 <div
-                  className="text-white p-6 pb-10 rounded-3xl min-h-full relative overflow-hidden lg:w-[40%]"
+                  className="text-white p-6 pb-10 rounded-3xl min-h-full relative overflow-hidden w-full"
                   style={{ background: "rgba(26, 26, 26, 1)" }}
                 >
                   {/* صور الخلفية الديكورية */}
@@ -369,7 +359,7 @@ export default function PackagePopup({ pkg }) {
               {/* ======== قسم نموذج الاشتراك ======== */}
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-4 flex-1"
+                className="flex flex-col gap-4 flex-1 min-w-[55%]"
               >
                 <MotionDiv
                   variant="scaleFade"
