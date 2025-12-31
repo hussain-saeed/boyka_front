@@ -1,4 +1,4 @@
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 import Container from "../components/Container";
 
 const data = [

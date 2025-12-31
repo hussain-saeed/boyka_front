@@ -6,7 +6,7 @@ import { GoUnmute } from "react-icons/go";
 import { GoMute } from "react-icons/go";
 import { RiFullscreenFill } from "react-icons/ri";
 import { RiFullscreenExitFill } from "react-icons/ri";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 const Video = () => {
   const videoRef = useRef(null);

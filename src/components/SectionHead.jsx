@@ -1,4 +1,4 @@
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 function SectionHead({ titleColor, titleText, descColor, descText }) {
   return (

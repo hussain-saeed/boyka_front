@@ -10,7 +10,7 @@ import Loader from "../components/Loader";
 // استيراد ستايلات Swiper
 import "swiper/css";
 import "swiper/css/navigation";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 const BASE_URL = "https://drboyka.onrender.com";
 

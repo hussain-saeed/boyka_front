@@ -3,7 +3,7 @@ import Button from "../components/Button.jsx";
 import Container from "../components/Container.jsx";
 import { TiArrowLeftThick } from "react-icons/ti";
 import Arrow from "../components/arrow.jsx";
-import { MotionDiv } from "../animations/motionPresets.jsx";
+import { MotionDiv } from "../animations/MotionPresets.jsx";
 
 export default function Hero() {
   return (

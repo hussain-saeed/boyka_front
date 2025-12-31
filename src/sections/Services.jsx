@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../components/Container";
 import SectionHead from "../components/SectionHead";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 const items = [
   {

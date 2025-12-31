@@ -1,5 +1,5 @@
 import Container from "./Container";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 function Footer() {
   return (

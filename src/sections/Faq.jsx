@@ -6,7 +6,7 @@ import { MdOutlineCloseFullscreen } from "react-icons/md";
 import { MdOpenInFull } from "react-icons/md";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { IoIosArrowDropup } from "react-icons/io";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 const dataColumn1 = [
   {

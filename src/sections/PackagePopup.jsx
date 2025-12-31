@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { useRef } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 import FogBackground from "../components/FogBackground";
 
 export default function PackagePopup({ pkg, setSelectedPackage }) {

@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import Arrow from "../components/Arrow";
 import { IoMdCheckmark } from "react-icons/io";
 import Lenis from "@studio-freight/lenis";
-import { MotionDiv } from "../animations/motionPresets";
+import { MotionDiv } from "../animations/MotionPresets";
 
 export default function Packages({ onSelectPackage }) {
   const { packagesIsLoading, packages, errorFetchingPackages } = usePackages();
