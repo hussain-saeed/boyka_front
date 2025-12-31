@@ -23,7 +23,7 @@ const data = [
 export default function Who() {
   return (
     <section
-      className="w-full pt-14 pb-18 relative overflow-hidden"
+      className="w-full pt-14 pb-16 relative overflow-hidden"
       style={{
         background:
           "linear-gradient(224deg, rgb(255, 255, 255) 60%, #f5ffb8 100%)",
@@ -112,7 +112,7 @@ export default function Who() {
               <img
                 src="/images/who-5.png"
                 alt="youssef"
-                className="w-full max-w-md h-auto"
+                className="w-full max-w-md h-auto animate-float"
               />
             </div>
           </MotionDiv>

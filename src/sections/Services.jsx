@@ -5,25 +5,25 @@ import { MotionDiv } from "../animations/MotionPresets";
 
 const items = [
   {
-    image: "/images/serv-1.png",
+    image: "/images/serv-4.svg",
     title: "تغذية علاجية ومرنة",
     description:
       "نظام غذائي محسوب السعرات حسب حالتك الصحية وهدفك، مبني بالكامل على أصناف الطعام التي تفضلها بدون حرمان.",
   },
   {
-    image: "/images/serv-2.png",
+    image: "/images/serv-2.svg",
     title: "تدريب احترافي ذكي",
     description:
       "برنامج تدريبي مفصل يناسب يومك (جيم أو منزل) مع فيديوهات شرح دقيقة للأداء الصحيح لتجنب الإصابات.",
   },
   {
-    image: "/images/serv-3.png",
+    image: "/images/serv-1.svg",
     title: "تأهيل وتطور مستمر",
     description:
       "برامج خاصة لتأهيل الإصابات، مع تغيير شامل لخطط التدريب والتغذية شهرياً لضمان استمرار النتائج.",
   },
   {
-    image: "/images/serv-4.png",
+    image: "/images/serv-3.svg",
     title: "متابعة شخصية 100%",
     description:
       "متابعة يومية مباشرة معي شخصياً (بدون فريق مساعدين) عبر الواتساب لضمان التزامك والرد على استفساراتك.",
