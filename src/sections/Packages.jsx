@@ -43,15 +43,11 @@ export default function Packages({ onSelectPackage }) {
           return (
             <div
               key={pkg.id}
-              className={`package-box px-5 pt-8 pb-9 rounded-4xl shadow-md transition-transform ${
-                isSpecial ? "xl:-translate-y-7" : ""
-              }`}
+              className={`package-box px-5 pt-8 pb-9 rounded-4xl shadow-md transition-transform`}
               style={{
-                border: isSpecial ? "none" : "1px solid rgba(230, 230, 230, 1)",
+                border: "1px solid rgba(230, 230, 230, 1)",
                 boxShadow: "0px 4px 100px 0px rgba(0, 0, 0, 0.1)",
-                background: isSpecial
-                  ? "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(230, 255, 117, 1) 179.83%)"
-                  : "white",
+                background: "white",
               }}
             >
               <MotionDiv
