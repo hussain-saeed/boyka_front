@@ -76,7 +76,6 @@ export default function Loader() {
         <div className="dot dot-3"></div>
       </div>
 
-      {/* SVG filter */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"

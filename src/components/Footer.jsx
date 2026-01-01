@@ -1,5 +1,6 @@
 import Container from "./Container";
 import { MotionDiv } from "../animations/MotionPresets";
+import { FaWhatsapp } from "react-icons/fa6";
 
 function Footer() {
   return (
@@ -25,8 +26,16 @@ function Footer() {
               visibleOverride={{ transition: { delay: 0.4, duration: 1 } }}
             >
               © {new Date().getFullYear()}{" "}
-              <span style={{ color: "var(--color-primary)" }}>Boyka</span>. All
-              Rights Reserved.
+              <a
+                href="https://wa.me/201272009540"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--color-primary)" }}
+                className="cursor-pointer"
+              >
+                Boyka
+              </a>
+              . All Rights Reserved.
             </MotionDiv>
           </div>
 
@@ -35,10 +44,33 @@ function Footer() {
               variant="slideXRight"
               visibleOverride={{ transition: { delay: 0.2, duration: 0.8 } }}
             >
-              <div className="flex gap-3">
-                <img src="/images/x.svg" alt="x" />
-                <img src="/images/insta.svg" alt="insta" />
-                <img src="/images/face.svg" alt="face" />
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.instagram.com/___boykaa__"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer"
+                >
+                  <img src="/images/insta.svg" alt="insta" />
+                </a>
+
+                <a
+                  href="https://wa.me/201272009540"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer"
+                >
+                  <FaWhatsapp style={{ fontSize: "24px" }} />
+                </a>
+
+                <a
+                  href="https://www.facebook.com/youssef.abd.alhamed.455440"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer"
+                >
+                  <img src="/images/face.svg" alt="face" />
+                </a>
               </div>
             </MotionDiv>
           </div>

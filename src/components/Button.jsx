@@ -4,9 +4,9 @@ export default function Button({
   onClick,
   className = "",
   style = {},
-  animateLeft = false, // "slide" أو "pulse" أو false
-  animationDelay = 0, // delay بالثواني
-  animationDuration = 3, // مدة الانيميشن الكاملة
+  animateLeft = false, // "slide" or "pulse" or false
+  animationDelay = 0,
+  animationDuration = 3,
 }) {
   const getAnimation = () => {
     if (animateLeft === "slide") {
@@ -36,7 +36,7 @@ export default function Button({
         </span>
       )}
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideLeftLoop {
           0%,
           33.3% {

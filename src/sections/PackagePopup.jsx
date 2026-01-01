@@ -22,7 +22,6 @@ export default function PackagePopup({
   convertToUSD,
   usdRate,
 }) {
-  // ======== حالات النموذج ========
   const [fullname, setFullname] = useState("");
   const [whatsappCode, setWhatsappCode] = useState("");
   const [whatsappNumber, setWhatsappNumber] = useState("");
@@ -33,19 +32,15 @@ export default function PackagePopup({
   const whatsappInputRef = useRef(null);
   const callsInputRef = useRef(null);
 
-  // ======== معلومات الباقة ========
   const selectedMonth = pkg?.selectedMonth || 1;
 
-  // لو مفيش باقة، متعرضش حاجة
   if (!pkg) return null;
 
-  // تنظيف الإدخال الرقمي والحد من الطول
   const handleNumberInput = (value, setter, maxLength) => {
     const cleaned = value.replace(/\D/g, "");
     setter(cleaned.slice(0, maxLength));
   };
 
-  // تفريغ النموذج
   const resetForm = () => {
     setFullname("");
     setWhatsappCode("");
@@ -55,7 +50,6 @@ export default function PackagePopup({
     setEmail("");
   };
 
-  // حساب السعر حسب المدة المختارة
   const getPrice = (month) => {
     if (month === 1)
       return {
@@ -77,17 +71,14 @@ export default function PackagePopup({
 
   const prices = getPrice(selectedMonth);
 
-  // ======== معالجة إرسال النموذج ========
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // التحقق من الاسم
     if (!fullname) {
       e.target.reportValidity();
       return;
     }
 
-    // التحقق من اختيار كود البلد
     if (!whatsappCode) {
       toast.error("يرجى اختيارالبلد!");
       return;
@@ -100,7 +91,6 @@ export default function PackagePopup({
     const whatsappDigits = whatsappNumber.length;
     const callsDigits = callsNumber.length;
 
-    // تحقق خاص برقم مصر (يبدأ بـ 01 و10 أرقام)
     if (whatsappCode === "+20") {
       if (whatsappDigits !== 10 || !whatsappNumber.startsWith("1")) {
         toast.error("رقم الواتساب المصري يجب أن يبدأ بـ 1 ويتكون من 10 أرقام!");
@@ -123,13 +113,11 @@ export default function PackagePopup({
       return;
     }
 
-    // تحقق من صحة الإيميل إذا تم إدخاله
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("يرجى إدخال بريد إلكتروني صالح");
       return;
     }
 
-    // تجميع البيانات للإرسال
     const data = {
       package: pkg.id,
       duration: selectedMonth === 1 ? "1_month" : `${selectedMonth}_months`,
@@ -158,13 +146,13 @@ export default function PackagePopup({
         });
         Swal.fire({
           backdrop: "rgba(0, 0, 0, 0.7)",
-          html: '<p class="custom-text">تم بنجاح وسيتم التواصل معك قريبا!</p>', // النص أسفل العنوان
-          icon: "success", // أيقونة التنبيه: 'info', 'success', 'error', 'warning'
-          confirmButtonText: "حسنا", // نص زر التأكيد
+          html: '<p class="custom-text">تم بنجاح وسيتم التواصل معك قريبا!</p>',
+          icon: "success",
+          confirmButtonText: "حسنا",
           allowOutsideClick: false,
           customClass: {
-            popup: "custom-popup", // الصندوق كله
-            confirmButton: "custom-btn", // زر التأكيد
+            popup: "custom-popup",
+            confirmButton: "custom-btn",
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -183,13 +171,10 @@ export default function PackagePopup({
     }
   };
 
-  // ======== إعدادات React Select ========
-
-  // تحضير خيارات البلدان
   const countryOptions = countryCodes.map((c) => ({
     value: c.dial_code,
     label: (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2" key={c}>
         <div className="w-7 h-4 flex justify-center items-center border border-gray-200 shadow-[0_2px_6px_rgba(0,0,0,0.08)] transform -skew-x-12 rounded-sm overflow-hidden">
           <img
             src={`https://flagsapi.com/${c.code}/flat/32.png`}
@@ -208,7 +193,6 @@ export default function PackagePopup({
     code: c.code,
   }));
 
-  // تنسيقات React Select المخصصة
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
@@ -244,7 +228,6 @@ export default function PackagePopup({
     }),
   };
 
-  // مكون SingleValue المخصص لعرض placeholder لو مفيش اختيار
   const SingleValue = ({ children, ...props }) => {
     if (!props.getValue().length) {
       return (
@@ -256,7 +239,6 @@ export default function PackagePopup({
     );
   };
 
-  // ======== الـ JSX ========
   return (
     <div className="relative min-h-screen overflow-hidden">
       <FogBackground />
@@ -266,7 +248,6 @@ export default function PackagePopup({
           <div className="relative w-full xl:w-[85%] mx-auto">
             <div className="relative bg-white rounded-3xl p-8 z-10 w-full shadow-2xl">
               <MotionDiv variant="slideXLeft">
-                {/* العنوان */}
                 <h2 className="font-semibold text-xl mb-1.5">
                   بيانات الاشتراك
                 </h2>
@@ -279,13 +260,11 @@ export default function PackagePopup({
               </MotionDiv>
 
               <div className="flex gap-8 lg:flex-row flex-col">
-                {/* ======== قسم عرض تفاصيل الباقة ======== */}
                 <MotionDiv variant="fade">
                   <div
                     className="text-white p-6 pb-10 rounded-3xl min-h-full relative overflow-hidden w-full"
                     style={{ background: "rgba(26, 26, 26, 1)" }}
                   >
-                    {/* صور الخلفية الديكورية */}
                     <img
                       src="/images/serv-5.png"
                       alt="light"
@@ -297,7 +276,6 @@ export default function PackagePopup({
                       className="absolute w-400 -bottom-30 -left-30"
                     />
 
-                    {/* عنوان ووصف الباقة */}
                     <h2 className="text-2xl font-semibold mb-3">{pkg.name}</h2>
                     <p
                       className="mb-8"
@@ -306,7 +284,6 @@ export default function PackagePopup({
                       {pkg.short_description}
                     </p>
 
-                    {/* مميزات الباقة */}
                     {pkg.descriptions.length !== 0 && (
                       <ul className="space-y-3 pl-2 mb-8">
                         {pkg.descriptions.map((desc, idx) => (
@@ -326,7 +303,6 @@ export default function PackagePopup({
                       </ul>
                     )}
 
-                    {/* مدة الاشتراك */}
                     <p
                       className="font-semibold mb-3 pt-7"
                       style={{ borderTop: "1px solid rgba(153, 153, 153, 1)" }}
@@ -339,13 +315,12 @@ export default function PackagePopup({
                         : "12 شهر"}
                     </p>
 
-                    {/* السعر بعد الخصم */}
-                    <div className="flex items-center gap-1 ">
+                    <div className="flex xs:items-center xs:gap-1 flex-col xs:flex-row">
                       <p className="font-bold text-2xl">{prices.after} جنيه</p>
                       {!usdRate ? (
                         ""
                       ) : (
-                        <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
+                        <div className="xs:mt-1 flex items-center gap-1 font-semibold text-xl ">
                           <span>=</span>
                           <span>{convertToUSD(prices.after)} دولار</span>
                         </div>
@@ -354,7 +329,6 @@ export default function PackagePopup({
                   </div>
                 </MotionDiv>
 
-                {/* ======== قسم نموذج الاشتراك ======== */}
                 <form
                   onSubmit={handleSubmit}
                   className="flex flex-col gap-4 flex-1 min-w-[55%]"
@@ -365,7 +339,6 @@ export default function PackagePopup({
                       viewport: { once: false },
                     }}
                   >
-                    {/* حقل الاسم */}
                     <div className="w-full">
                       <label className="block mb-1.5 text-sm font-semibold">
                         الاسم بالكامل
@@ -402,9 +375,7 @@ export default function PackagePopup({
                       viewport: { once: false },
                     }}
                   >
-                    {/* حقل رقم الواتساب */}
                     <div className="flex gap-3 items-start flex-col sm:flex-row sm:pt-0 pt-2.5 border-gray-300 border-t-2 border-dotted sm:border-none">
-                      {/* كود الدولة */}
                       <div className="sm:w-[45%] flex flex-col w-full">
                         <label className="block mb-1.5 text-sm font-semibold text-right">
                           البلد <span className="text-red-500 mr-0.5">*</span>
@@ -436,7 +407,6 @@ export default function PackagePopup({
                         </div>
                       </div>
 
-                      {/* رقم الواتساب */}
                       <div className="w-full sm:w-[55%] flex flex-col">
                         <label className="block mb-1.5 text-sm font-semibold text-right">
                           رقم الواتساب
@@ -448,7 +418,6 @@ export default function PackagePopup({
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                           />
 
-                          {/* كود الدولة – يظهر فقط بعد الاختيار */}
                           {whatsappCode && (
                             <span
                               className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-600 bg-gray-200 px-2 py-0.5 rounded-md"
@@ -485,9 +454,7 @@ export default function PackagePopup({
                       viewport: { once: false },
                     }}
                   >
-                    {/* حقل رقم المكالمات */}
                     <div className="flex gap-3 items-start flex-col sm:flex-row sm:pt-0 pt-2.5 border-gray-300 border-t-2 border-dotted sm:border-none">
-                      {/* كود الدولة */}
                       <div className="sm:w-[45%] flex flex-col w-full">
                         <label className="block mb-1.5 text-sm font-semibold text-right">
                           البلد <span className="text-red-500 mr-0.5">*</span>
@@ -518,7 +485,6 @@ export default function PackagePopup({
                         </div>
                       </div>
 
-                      {/* رقم المكالمات */}
                       <div className="w-full sm:w-[55%] flex flex-col">
                         <label className="block mb-1.5 text-sm font-semibold text-right">
                           رقم المكالمات
@@ -530,7 +496,6 @@ export default function PackagePopup({
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                           />
 
-                          {/* كود الدولة – يظهر فقط بعد الاختيار */}
                           {callsCode && (
                             <span
                               className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-600 bg-gray-200 px-2 py-0.5 rounded-md"
@@ -567,7 +532,6 @@ export default function PackagePopup({
                       viewport: { once: false },
                     }}
                   >
-                    {/* البريد الإلكتروني (اختياري) */}
                     <div className="w-full sm:pt-0 pt-2.5 border-gray-300 border-t-2 border-dotted sm:border-none">
                       <label className="block mb-1.5 text-sm font-semibold">
                         البريد الإلكتروني
@@ -602,7 +566,6 @@ export default function PackagePopup({
                       viewport: { once: false },
                     }}
                   >
-                    {/* زر إرسال النموذج */}
                     <button
                       type="submit"
                       disabled={loading}
@@ -615,7 +578,6 @@ export default function PackagePopup({
                       {loading ? "جاري الإرسال ..." : "إتمام طلب الاشتراك"}
                     </button>
 
-                    {/* ملاحظة الخصوصية */}
                     <p className="text-center text-sm">
                       نحن نحترم خصوصيتك، بياناتك في أمان تام.
                     </p>

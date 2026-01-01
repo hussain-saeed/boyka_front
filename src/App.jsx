@@ -26,7 +26,6 @@ function App() {
         const res = await fetch("https://open.er-api.com/v6/latest/EGP");
         const data = await res.json();
 
-        // تأمين الداتا
         if (!data?.rates?.USD) {
           throw new Error("USD rate not found");
         }
@@ -87,7 +86,6 @@ function App() {
             setSelectedPackage={setSelectedPackage}
           />
 
-          {/* لو فيه باقة مختارة، اعرض PackagePopup بس */}
           {selectedPackage ? (
             <PackagePopup
               pkg={selectedPackage}
@@ -96,19 +94,17 @@ function App() {
               usdRate={usdRate}
             />
           ) : (
-            // لو مفيش باقة مختارة، اعرض المحتوى العادي
             <>
-              <Hero /> {/* واخد id main */}
+              <Hero />
               <img
                 src="/images/hero-right-ellipse.png"
                 alt="hero-right-ellipse"
                 className="absolute -top-30 -right-30 lg:-top-100 lg:-right-120 z-0"
               />
-              <Services /> {/* واخد id services */}
+              <Services />
               <Video />
               <Who />
-              <Transformations /> {/* واخد id transformations*/}
-              {/* واخد id packages*/}
+              <Transformations />
               <Packages
                 onSelectPackage={setSelectedPackage}
                 convertToUSD={convertToUSD}

@@ -28,7 +28,7 @@ function Transformations() {
         console.log(result);
         setData(result);
       } catch (err) {
-        setHasError(true); // <-- لو حصل أي خطأ نخليها true
+        setHasError(true);
       } finally {
         setLoading(false);
       }
@@ -203,7 +203,7 @@ function Transformations() {
           </div>
         </div>
 
-        <style jsx global>{`
+        <style>{`
           .swiper-button-lock {
             display: none !important;
           }
@@ -296,7 +296,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Loader from "../components/Loader";
 
-// استيراد ستايلات Swiper
 import "swiper/css";
 import "swiper/css/navigation";
 import { MotionDiv } from "../animations/MotionPresets";
@@ -306,7 +305,7 @@ const BASE_URL = "https://drboyka.onrender.com";
 function Transformations() {
   //const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false); // <-- فقط حالة الخطأ
+  const [hasError, setHasError] = useState(false);
 
   /*useEffect(() => {
     const fetchData = async () => {
@@ -318,7 +317,7 @@ function Transformations() {
         console.log(result);
         setData(result);
       } catch (err) {
-        setHasError(true); // <-- لو حصل أي خطأ نخليها true
+        setHasError(true);
       } finally {
         setLoading(false);
       }
@@ -437,7 +436,7 @@ function Transformations() {
                       <span
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 font-semibold text-center py-1.5 w-18 z-20 rounded-full"
                         style={{
-                          background: "var(--color-primary)", // وضعنا لون احتياطي في حال عدم قراءة المتغير
+                          background: "var(--color-primary)",
                         }}
                       >
                         قبل
@@ -455,7 +454,7 @@ function Transformations() {
                       <span
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 font-semibold text-center py-1.5 w-18 z-20 rounded-full"
                         style={{
-                          background: "var(--color-primary)", // وضعنا لون احتياطي في حال عدم قراءة المتغير
+                          background: "var(--color-primary)",
                         }}
                       >
                         بعد

@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 
 export default function TypeWriter({
   children,
-  speed = 50, // سرعة الكتابة بالميلي ثانية
-  delay = 0, // التأخير قبل البدء بالثواني
+  speed = 50,
+  delay = 0,
   className = "",
   style = {},
-  onComplete = () => {}, // callback لما يخلص
+  onComplete = () => {},
 }) {
   const [displayedText, setDisplayedText] = useState("");
   const [started, setStarted] = useState(false);
   const text = typeof children === "string" ? children : "";
 
   useEffect(() => {
-    // الانتظار حسب الـ delay
     const delayTimeout = setTimeout(() => {
       setStarted(true);
     }, delay * 1000);

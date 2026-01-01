@@ -15,14 +15,14 @@ export default function FogBackground() {
         touchControls: false,
         gyroControls: false,
 
-        highlightColor: 0xebfc4f, // أصفر لايم فاتح شويه
-        midtoneColor: 0xd9fc23, // اللون الأساسي بتاعك
-        lowlightColor: 0xa9c933, // لايم متوسط، مش غامق أوي
+        highlightColor: 0xebfc4f,
+        midtoneColor: 0xd9fc23,
+        lowlightColor: 0xa9c933,
         baseColor: 0xf7ffeb,
 
-        blurFactor: 0.4, // ضبابية تفتح المشهد
+        blurFactor: 0.4,
         zoom: 0.9,
-        speed: 1, //
+        speed: 1,
       });
     }
 

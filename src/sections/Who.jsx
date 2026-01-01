@@ -51,7 +51,6 @@ export default function Who() {
           gap-12
         "
         >
-          {/* الجزء النصي */}
           <div className="flex flex-col gap-10 lg:max-w-xl text-center lg:text-right">
             <MotionDiv variant="scaleFade">
               <h2 className="text-3xl font-medium">من هو ك.يوسف؟</h2>
@@ -60,6 +59,7 @@ export default function Who() {
             <ul className="flex flex-col gap-5 mx-auto lg:mx-0">
               {data.map((item, index) => (
                 <MotionDiv
+                  key={index}
                   variant="slideXRight"
                   visibleOverride={{
                     viewport: { once: true, amount: 0.9 },
@@ -82,7 +82,6 @@ export default function Who() {
                     lg:w-[89%]
                   "
                   >
-                    {/* الأيقونة */}
                     <div
                       style={{ background: "rgba(217, 250, 43, 0.22)" }}
                       className="w-12 h-12 flex items-center justify-center rounded-full shrink-0"
@@ -90,7 +89,6 @@ export default function Who() {
                       <img src={item.icon} alt="" />
                     </div>
 
-                    {/* النص */}
                     <p className="text-lg font-medium leading-relaxed">
                       {item.text}
                     </p>
@@ -100,7 +98,6 @@ export default function Who() {
             </ul>
           </div>
 
-          {/* الصورة */}
           <MotionDiv
             variant="scaleFade"
             visibleOverride={{

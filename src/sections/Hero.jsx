@@ -23,7 +23,6 @@ export default function Hero() {
         className="absolute  left-0 bottom-40 xl:-left-60 xl:-bottom-50 z-0"
       />
       <Container className="relative pt-14 xl:py-30">
-        {/* النص على الشمال */}
         <MotionDiv variant="scaleZ">
           <div className="flex flex-col text-center xl:text-right z-10 relative">
             <div
@@ -43,7 +42,7 @@ export default function Hero() {
                 }}
               />
 
-              <style jsx>{`
+              <style>{`
                 @keyframes flagWave {
                   0%,
                   100% {
@@ -74,8 +73,8 @@ export default function Hero() {
               style={{ color: "rgba(230, 230, 230, 1)" }}
             >
               <TypeWriter
-                speed={60} // سرعة الكتابة (أقل = أسرع)
-                delay={1} // تأخير قبل البدء بالثواني
+                speed={60}
+                delay={1}
                 onComplete={() => {}}
               >
                 اشترك حالاً وارمي الكسل على جنب - في أقل من شهر هتشوف نتايج
@@ -118,18 +117,20 @@ export default function Hero() {
                   <FaWhatsapp
                     style={{
                       fontSize: "1.5em",
-                      color: "rgba(109, 109, 109, 1)",
+                      color: "rgba(40, 40, 40)",
                     }}
                   />
                 }
                 animateLeft="pulse"
-                className="text-black w-53 py-4 font-bold "
+                className="text-black w-53 py-4 font-bold"
+                onClick={() => {
+                  window.open("https://wa.me/201272009540", "_blank");
+                }}
               />
             </div>
           </div>
         </MotionDiv>
 
-        {/* البوكس اللي شايل الصورتين */}
         <MotionDiv
           variant="fade"
           visibleOverride={{ transition: { duration: 2 } }}

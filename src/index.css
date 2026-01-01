@@ -29,47 +29,40 @@ body {
 }
 
 .swal2-container {
-  backdrop-filter: blur(4px); /* قوة البلور */
+  backdrop-filter: blur(4px);
 }
 
-/* الخط العام للصندوق */
 .custom-popup {
-  font-family: "Norsal", sans-serif; /* الخط اللي عايزه */
+  font-family: "Norsal", sans-serif; 
   border-radius: 20px;
   background: linear-gradient(300deg, #ffffff 50%, #f4ffaf 100%);
 
-  max-width: 90%; /* لا يزيد عن 90% من الشاشة */
-  width: auto; /* يتقلص حسب المحتوى */
-  box-sizing: border-box; /* للتأكد أن padding محسوبة داخل العرض */
+  max-width: 90%; 
+  width: auto;
+  box-sizing: border-box;
   padding: 0 20px 0 20px;
 }
 
-/* نص التنبيه */
 .custom-text {
-  font-size: 28px; /* حجم النص */
+  font-size: 28px;
   font-weight: bold;
 }
 
-/* زر التأكيد */
 .custom-btn {
   padding: 0.5rem 1rem;
   font-size: 20px;
   font-weight: 600;
-  border-radius: 1rem; /* rounded-2xl */
+  border-radius: 1rem;
   cursor: pointer;
   background-color: var(--color-primary);
   margin-bottom: 48px;
   color: black;
-
-  /* شادو خفيف */
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-
-  /* تأثير عند hover (اختياري) */
   transition: box-shadow 0.3s, transform 0.2s;
 }
 
 .custom-btn:hover {
-  background-color: var(--color-primary); /* لون الزر عند hover */
+  background-color: var(--color-primary);
 }
 
 @keyframes pulseSkew {
@@ -89,7 +82,6 @@ body {
   transform-origin: center;
 }
 
-/* 8. Float (طفو) */
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }

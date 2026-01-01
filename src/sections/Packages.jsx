@@ -43,7 +43,7 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
   } else {
     content = (
       <>
-        {/* Desktop and Tablet View */}
+        {/* desktop and tablet view */}
         <>
           <div className="hidden md:grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-20">
             {packages
@@ -314,7 +314,7 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
           )}
         </>
 
-        {/* Mobile View with Swiper */}
+        {/* mobile view with swiper */}
         <div className="block md:hidden mt-20">
           <Swiper
             modules={[Navigation]}
@@ -483,8 +483,8 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
 
                     {pkg.descriptions.length !== 0 && (
                       <ul className="space-y-3 mt-10 pl-2">
-                        {pkg.descriptions.map((desc) => (
-                          <li className="flex gap-2 items-start">
+                        {pkg.descriptions.map((desc, idx) => (
+                          <li className="flex gap-2 items-start" key={idx}>
                             <div
                               className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
                               style={{
@@ -508,7 +508,7 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
           </Swiper>
         </div>
 
-        <style jsx global>{`
+        <style>{`
           .swiper-button-lock {
             display: none !important;
           }

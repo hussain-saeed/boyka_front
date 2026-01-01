@@ -58,7 +58,6 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
         isScrolled ? "shadow-xl" : "shadow-none"
       }`}
     >
-      {/* Background layer */}
       <div
         className={`absolute inset-0 transition-opacity duration-300 ${
           isScrolled ? "opacity-100" : "opacity-0"
@@ -78,7 +77,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
       >
         <Container>
           <div className="flex items-center flex-row-reverse lg:flex-row justify-between py-4">
-            {/* Logo */}
+            {/* logo */}
             <div
               className="text-2xl relative overflow-hidden"
               style={{
@@ -142,7 +141,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
                 B
               </span>
 
-              <style jsx>{`
+              <style>{`
                 @keyframes waveLoop {
                   0% {
                     transform: translateY(0px) scale(1);
@@ -160,7 +159,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
               `}</style>
             </div>
 
-            {/* Nav links - desktop */}
+            {/* desktop nav links */}
             {selectedPackage ? (
               ""
             ) : (
@@ -198,7 +197,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
               </nav>
             )}
 
-            {/* Button - desktop */}
+            {/* desktop button */}
             {selectedPackage ? (
               <div className="hidden lg:block">
                 <Button
@@ -230,7 +229,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
               </div>
             )}
 
-            {/* Burger icon */}
+            {/* burger icon */}
             <button
               onClick={() => setOpen(!open)}
               className="lg:hidden text-2xl transition-all duration-300"
@@ -240,7 +239,7 @@ export default function Header({ selectedPackage, setSelectedPackage }) {
             </button>
           </div>
 
-          {/* Mobile menu */}
+          {/* mobile menu */}
           <div
             className={`
             lg:hidden overflow-hidden transition-all duration-300
