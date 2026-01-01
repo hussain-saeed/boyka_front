@@ -18,6 +18,33 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const [selectedPackage, setSelectedPackage] = useState(null);
 
+  const [usdRate, setUsdRate] = useState(null);
+
+  useEffect(() => {
+    const fetchRate = async () => {
+      try {
+        const res = await fetch("https://open.er-api.com/v6/latest/EGP");
+        const data = await res.json();
+
+        // تأمين الداتا
+        if (!data?.rates?.USD) {
+          throw new Error("USD rate not found");
+        }
+
+        setUsdRate(data.rates.USD);
+      } catch (err) {
+        console.error("Currency error:", err);
+      }
+    };
+
+    fetchRate();
+  }, []);
+
+  const convertToUSD = (egpAmount) => {
+    if (!usdRate) return;
+    return (Number(egpAmount) * usdRate).toFixed(2);
+  };
+
   useEffect(() => {
     if (window.location.pathname !== "/") {
       window.history.replaceState(null, "", "/");
@@ -65,6 +92,8 @@ function App() {
             <PackagePopup
               pkg={selectedPackage}
               setSelectedPackage={setSelectedPackage}
+              convertToUSD={convertToUSD}
+              usdRate={usdRate}
             />
           ) : (
             // لو مفيش باقة مختارة، اعرض المحتوى العادي
@@ -80,7 +109,11 @@ function App() {
               <Who />
               <Transformations /> {/* واخد id transformations*/}
               {/* واخد id packages*/}
-              <Packages onSelectPackage={setSelectedPackage} />
+              <Packages
+                onSelectPackage={setSelectedPackage}
+                convertToUSD={convertToUSD}
+                usdRate={usdRate}
+              />
               <Faq />
             </>
           )}

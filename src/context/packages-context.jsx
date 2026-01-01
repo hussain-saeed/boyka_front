@@ -34,7 +34,7 @@ export function PackagesProvider({ children }) {
 
   const packages = [
     {
-      id: 3,
+      id: 2,
       name: "باقة القوة الأساسية",
       short_description:
         "برنامج تدريبي متكامل للمبتدئين يركز على بناء العضلات.",
@@ -54,7 +54,7 @@ export function PackagesProvider({ children }) {
     },
 
     {
-      id: 4,
+      id: 3,
       name: "باقة التحول السريع",
       short_description:
         "برنامج مكثف لحرق الدهون وإعادة تشكيل الجسم في وقت قياسي.",
@@ -73,7 +73,6 @@ export function PackagesProvider({ children }) {
       is_active: true,
       updated_at: "2025-12-24T18:20:11.112233+02:00",
     },
-
     {
       id: 5,
       name: "باقة الأداء الاحترافي",
@@ -94,6 +93,26 @@ export function PackagesProvider({ children }) {
       twelve_month_price_after_discount: "7000.00",
       is_active: true,
       updated_at: "2025-12-26T14:45:32.445566+02:00",
+    },
+    {
+      id: 4,
+      name: "باقة التحول السريع",
+      short_description:
+        "برنامج مكثف لحرق الدهون وإعادة تشكيل الجسم في وقت قياسي.",
+      descriptions: [
+        "خطة كارديو مخصصة لحرق الدهون",
+        "نظام غذائي عالي البروتين",
+        "متابعة يومية عبر واتساب",
+        "تعديلات أسبوعية على الخطة حسب التقدم",
+      ],
+      one_month_price_before_discount: "700.00",
+      one_month_price_after_discount: "550.00",
+      six_month_price_before_discount: "3600.00",
+      six_month_price_after_discount: "3000.00",
+      twelve_month_price_before_discount: "6500.00",
+      twelve_month_price_after_discount: "5200.00",
+      is_active: true,
+      updated_at: "2025-12-24T18:20:11.112233+02:00",
     },
   ];
 

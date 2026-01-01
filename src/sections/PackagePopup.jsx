@@ -16,7 +16,12 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { MotionDiv } from "../animations/MotionPresets";
 import FogBackground from "../components/FogBackground";
 
-export default function PackagePopup({ pkg, setSelectedPackage }) {
+export default function PackagePopup({
+  pkg,
+  setSelectedPackage,
+  convertToUSD,
+  usdRate,
+}) {
   // ======== حالات النموذج ========
   const [fullname, setFullname] = useState("");
   const [whatsappCode, setWhatsappCode] = useState("");
@@ -335,7 +340,17 @@ export default function PackagePopup({ pkg, setSelectedPackage }) {
                     </p>
 
                     {/* السعر بعد الخصم */}
-                    <p className="font-bold text-2xl">{prices.after} جنيه</p>
+                    <div className="flex items-center gap-1 ">
+                      <p className="font-bold text-2xl">{prices.after} جنيه</p>
+                      {!usdRate ? (
+                        ""
+                      ) : (
+                        <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
+                          <span>=</span>
+                          <span>{convertToUSD(prices.after)} دولار</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </MotionDiv>
 
