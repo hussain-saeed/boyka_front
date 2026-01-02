@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { MotionDiv } from "../animations/MotionPresets";
 import FogBackground from "../components/FogBackground";
+import Ribbon from "../components/Ribbon";
 
 export default function PackagePopup({
   pkg,
@@ -259,70 +260,97 @@ export default function PackagePopup({
 
               <div className="flex gap-8 lg:flex-row flex-col">
                 <MotionDiv variant="fade">
-                  <div
-                    className="text-white p-6 pb-10 rounded-3xl min-h-full relative overflow-hidden w-full"
-                    style={{ background: "rgba(26, 26, 26, 1)" }}
-                  >
-                    <img
-                      src="/images/serv-5.png"
-                      alt="light"
-                      className="absolute w-400 -top-30 -right-30"
-                    />
-                    <img
-                      src="/images/hero-left-ellipse.png"
-                      alt="light"
-                      className="absolute w-400 -bottom-30 -left-30"
-                    />
-
-                    <h2 className="text-2xl font-semibold mb-3">{pkg.name}</h2>
-                    <p
-                      className="mb-8"
-                      style={{ color: "rgba(230, 230, 230, 1)" }}
-                    >
-                      {pkg.short_description}
-                    </p>
-
-                    {pkg.descriptions.length !== 0 && (
-                      <ul className="space-y-3 pl-2 mb-8">
-                        {pkg.descriptions.map((desc, idx) => (
-                          <li key={idx} className="flex gap-2 items-start">
-                            <div
-                              className="w-5 h-5 rounded-full shrink-0 flex justify-center items-center mt-0.5"
-                              style={{
-                                backgroundColor: "var(--color-primary)",
-                                color: "white",
-                              }}
-                            >
-                              <IoMdCheckmark />
-                            </div>
-                            <span className="font-medium">{desc}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="relative">
+                    {pkg.is_special ? (
+                      <Ribbon
+                        selectedMonth={selectedMonth}
+                        before1={pkg.one_month_price_before_discount}
+                        after1={pkg.one_month_price_after_discount}
+                        before6={pkg.six_month_price_before_discount}
+                        after6={pkg.six_month_price_after_discount}
+                        before12={pkg.twelve_month_price_before_discount}
+                        after12={pkg.twelve_month_price_after_discount}
+                      />
+                    ) : (
+                      ""
                     )}
-
-                    <p
-                      className="font-semibold mb-3 pt-7"
-                      style={{ borderTop: "1px solid rgba(153, 153, 153, 1)" }}
+                    <div
+                      className={`text-white px-6 ${
+                        pkg.is_special ? "pt-18 pb-24" : "pt-6 pb-10"
+                      } xs:pt-6 xs:pb-10 rounded-3xl min-h-full relative overflow-hidden w-full`}
+                      style={{ background: "rgba(26, 26, 26, 1)" }}
                     >
-                      مدة الاشتراك:{" "}
-                      {selectedMonth === 1
-                        ? "شهر"
-                        : selectedMonth === 6
-                        ? "6 شهور"
-                        : "12 شهر"}
-                    </p>
+                      <img
+                        src="/images/serv-5.png"
+                        alt="light"
+                        className="absolute w-400 -top-30 -right-30"
+                      />
+                      <img
+                        src="/images/hero-left-ellipse.png"
+                        alt="light"
+                        className="absolute w-400 -bottom-30 -left-30"
+                      />
 
-                    <div className="flex xs:items-center xs:gap-1 flex-col xs:flex-row">
-                      <p className="font-bold text-2xl">{prices.after} جنيه</p>
-                      {!usdRate ? (
-                        ""
-                      ) : (
-                        <div className="xs:mt-1 flex items-center gap-1 font-semibold text-xl ">
-                          <span>=</span>
-                          <span>{convertToUSD(prices.after)} دولار</span>
-                        </div>
+                      <h2 className="text-2xl font-semibold mb-3">
+                        {pkg.name}
+                      </h2>
+                      <p
+                        className={`mb-8 ${
+                          pkg.is_special ? "max-w-[85%]" : ""
+                        }`}
+                        style={{
+                          color: "rgba(230, 230, 230, 1)",
+                        }}
+                      >
+                        {pkg.short_description}
+                      </p>
+
+                      {pkg.descriptions.length !== 0 && (
+                        <ul className="space-y-3 pl-2 mb-8">
+                          {pkg.descriptions.map((desc, idx) => (
+                            <li key={idx} className="flex gap-2 items-start">
+                              <div
+                                className="w-5 h-5 rounded-full shrink-0 flex justify-center items-center mt-0.5"
+                                style={{
+                                  backgroundColor: "var(--color-primary)",
+                                  color: "white",
+                                }}
+                              >
+                                <IoMdCheckmark />
+                              </div>
+                              <span className="font-medium">{desc}</span>
+                            </li>
+                          ))}
+                        </ul>
                       )}
+
+                      <p
+                        className="font-semibold mb-3 pt-7"
+                        style={{
+                          borderTop: "1px solid rgba(153, 153, 153, 1)",
+                        }}
+                      >
+                        مدة الاشتراك:{" "}
+                        {selectedMonth === 1
+                          ? "شهر"
+                          : selectedMonth === 6
+                          ? "6 شهور"
+                          : "12 شهر"}
+                      </p>
+
+                      <div className="flex xs:items-center xs:gap-1 flex-col xs:flex-row">
+                        <p className="font-bold text-2xl">
+                          {prices.after} جنيه
+                        </p>
+                        {!usdRate ? (
+                          ""
+                        ) : (
+                          <div className="xs:mt-1 flex items-center gap-1 font-semibold text-xl ">
+                            <span>=</span>
+                            <span>{convertToUSD(prices.after)} دولار</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </MotionDiv>

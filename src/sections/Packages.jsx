@@ -15,6 +15,7 @@ import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import { AiOutlineFullscreen } from "react-icons/ai";
 import { AiOutlineFullscreenExit } from "react-icons/ai";
 import FogBackground from "../components/FogBackground";
+import Ribbon from "../components/Ribbon";
 
 export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
   const { packagesIsLoading, packages, errorFetchingPackages } = usePackages();
@@ -61,279 +62,297 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
                 const selectedMonth = selectedMonths[pkg.id] || 1;
 
                 return (
-                  <div
-                    key={pkg.id}
-                    className="package-box px-5 pt-8 pb-9 rounded-4xl transition-transform relative overflow-hidden"
-                    style={{
-                      border: pkg.is_special ? "" : "1px solid #E0E0E0",
-                      boxShadow: pkg.is_special
-                        ? "0 10px 30px rgba(255, 195, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08)"
-                        : "0 6px 20px rgba(0, 0, 0, 0.08)",
-                      background: "white",
-                    }}
-                  >
-                    {pkg.is_special === true ? (
-                      <FogBackground className="z-0" />
+                  <div className="relative">
+                    {pkg.is_special ? (
+                      <Ribbon
+                        selectedMonth={selectedMonth}
+                        before1={pkg.one_month_price_before_discount}
+                        after1={pkg.one_month_price_after_discount}
+                        before6={pkg.six_month_price_before_discount}
+                        after6={pkg.six_month_price_after_discount}
+                        before12={pkg.twelve_month_price_before_discount}
+                        after12={pkg.twelve_month_price_after_discount}
+                      />
                     ) : (
                       ""
                     )}
 
-                    <div className="relative z-10">
-                      <MotionDiv
-                        variant="scaleFade"
-                        visibleOverride={{
-                          viewport: { once: true, amount: 1 },
-                          transition: { duration: 1 },
-                        }}
-                      >
-                        <h2
-                          className="text-3xl font-semibold mb-1.5"
-                          style={{
-                            color: pkg.is_special
-                              ? "rgba(0, 0, 0, 0.8)"
-                              : "rgba(0, 0, 0, 1)",
+                    <div
+                      key={pkg.id}
+                      className="package-box px-5 pt-8 pb-9 rounded-4xl transition-transform relative overflow-hidden"
+                      style={{
+                        border: pkg.is_special ? "" : "1px solid #E0E0E0",
+                        boxShadow: pkg.is_special
+                          ? "0 10px 30px rgba(255, 195, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08)"
+                          : "0 6px 20px rgba(0, 0, 0, 0.08)",
+                        background: "white",
+                      }}
+                    >
+                      {pkg.is_special === true ? (
+                        <FogBackground className="z-0" />
+                      ) : (
+                        ""
+                      )}
+
+                      <div className="relative z-10">
+                        <MotionDiv
+                          variant="scaleFade"
+                          visibleOverride={{
+                            viewport: { once: true, amount: 1 },
+                            transition: { duration: 1 },
                           }}
                         >
-                          {pkg.name}
-                        </h2>
-                      </MotionDiv>
-                      <MotionDiv
-                        variant="scaleFade"
-                        visibleOverride={{
-                          viewport: { once: true, amount: 1 },
-                          transition: { duration: 1 },
-                        }}
-                      >
-                        <p
-                          style={{
-                            color: "rgba(102, 102, 102, 1)",
+                          <h2
+                            className="text-3xl font-semibold mb-1.5"
+                            style={{
+                              color: pkg.is_special
+                                ? "rgba(0, 0, 0, 0.8)"
+                                : "rgba(0, 0, 0, 1)",
+                              maxWidth: pkg.is_special ? "75%" : "",
+                            }}
+                          >
+                            {pkg.name}
+                          </h2>
+                        </MotionDiv>
+                        <MotionDiv
+                          variant="scaleFade"
+                          visibleOverride={{
+                            viewport: { once: true, amount: 1 },
+                            transition: { duration: 1 },
                           }}
-                          className="text-lg font-normal mb-8"
                         >
-                          {pkg.short_description}
-                        </p>
-                      </MotionDiv>
+                          <p
+                            style={{
+                              color: "rgba(102, 102, 102, 1)",
+                              maxWidth: pkg.is_special ? "87%" : "",
+                            }}
+                            className="text-lg font-normal mb-8"
+                          >
+                            {pkg.short_description}
+                          </p>
+                        </MotionDiv>
 
-                      <MotionDiv
-                        variant="scaleFade"
-                        visibleOverride={{
-                          viewport: { once: true, amount: 1 },
-                          transition: { duration: 1 },
-                        }}
-                      >
-                        <div className="mb-5">
-                          {selectedMonth === 1 && (
-                            <div>
-                              <div
-                                className="flex items-center gap-1"
-                                style={{
-                                  color: pkg.is_special
-                                    ? "rgba(0, 0, 0, 0.8)"
-                                    : "rgba(0, 0, 0, 1)",
-                                }}
-                              >
-                                <p className="font-bold text-2xl">
-                                  {pkg.one_month_price_after_discount} جنيه
-                                </p>
-                                {!usdRate ? (
-                                  ""
-                                ) : (
-                                  <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
-                                    <span>=</span>
-                                    <span>
-                                      {convertToUSD(
-                                        pkg.one_month_price_after_discount
-                                      )}{" "}
-                                      دولار
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-
-                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                                {pkg.one_month_price_before_discount} جنيه
-                              </p>
-                            </div>
-                          )}
-                          {selectedMonth === 6 && (
-                            <div>
-                              <div
-                                className="flex items-center gap-1"
-                                style={{
-                                  color: pkg.is_special
-                                    ? "rgba(0, 0, 0, 0.8)"
-                                    : "rgba(0, 0, 0, 1)",
-                                }}
-                              >
-                                <p className="font-bold text-2xl">
-                                  {pkg.six_month_price_after_discount} جنيه
-                                </p>
-                                {!usdRate ? (
-                                  ""
-                                ) : (
-                                  <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
-                                    <span>=</span>
-                                    <span>
-                                      {convertToUSD(
-                                        pkg.six_month_price_after_discount
-                                      )}{" "}
-                                      دولار
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-
-                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                                {pkg.six_month_price_before_discount} جنيه
-                              </p>
-                            </div>
-                          )}
-                          {selectedMonth === 12 && (
-                            <div>
-                              <div
-                                className="flex items-center gap-1"
-                                style={{
-                                  color: pkg.is_special
-                                    ? "rgba(0, 0, 0, 0.8)"
-                                    : "rgba(0, 0, 0, 1)",
-                                }}
-                              >
-                                <p className="font-bold text-2xl">
-                                  {pkg.twelve_month_price_after_discount} جنيه
-                                </p>
-                                {!usdRate ? (
-                                  ""
-                                ) : (
-                                  <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
-                                    <span>=</span>
-                                    <span>
-                                      {convertToUSD(
-                                        pkg.twelve_month_price_after_discount
-                                      )}{" "}
-                                      دولار
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                                {pkg.twelve_month_price_before_discount} جنيه
-                              </p>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex gap-2 my-2 mb-12">
-                          {[1, 6, 12].map((month) => (
-                            <button
-                              key={month}
-                              className={`pr-4 pl-4.5 pt-0.5 pb-2 rounded-lg`}
-                              style={{
-                                boxShadow:
-                                  selectedMonth === month &&
-                                  pkg.is_special === false
-                                    ? " 0 10px 30px rgba(217, 252, 35, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08)"
-                                    : selectedMonth === month &&
-                                      pkg.is_special === true
-                                    ? " 0 8px 25px rgba(255, 211, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1)"
-                                    : "",
-                                border:
-                                  selectedMonth === month &&
-                                  pkg.is_special === false
-                                    ? "1px solid rgba(180, 210, 30, 0.8)"
-                                    : selectedMonth === month &&
-                                      pkg.is_special === true
-                                    ? "1px solid #E6BE00"
-                                    : "1px solid #E0E0E0",
-                                background:
-                                  selectedMonth === month &&
-                                  pkg.is_special === false
-                                    ? "var(--color-primary)"
-                                    : selectedMonth === month &&
-                                      pkg.is_special === true
-                                    ? "rgb(255, 211, 0)"
-                                    : "rgba(245, 245, 245, 0.7)",
-                                cursor:
-                                  selectedMonth === month ? "" : "pointer",
-                              }}
-                              onClick={() => handleMonthChange(pkg.id, month)}
-                            >
-                              {month === 1
-                                ? "شهر"
-                                : month === 6
-                                ? "6 شهور"
-                                : "12 شهر"}
-                            </button>
-                          ))}
-                        </div>
-                      </MotionDiv>
-
-                      <MotionDiv
-                        variant="slideXRight"
-                        visibleOverride={{
-                          viewport: { once: true, amount: 1 },
-                          transition: { duration: 1 },
-                        }}
-                      >
-                        <Button
-                          text="الإشتراك فى الباقة"
-                          leftComponent={<Arrow backgroundColor={"white"} />}
-                          animateLeft="slide"
-                          animationDelay={index * 8}
-                          onClick={() => {
-                            onSelectPackage({
-                              ...pkg,
-                              selectedMonth,
-                            });
-                            window.lenis.scrollTo(0, {
-                              duration: 0.5,
-                            });
+                        <MotionDiv
+                          variant="scaleFade"
+                          visibleOverride={{
+                            viewport: { once: true, amount: 1 },
+                            transition: { duration: 1 },
                           }}
-                          className="py-4 font-bold w-full text-white text-lg gap-3"
-                          style={{ backgroundColor: "black" }}
-                        />
-                      </MotionDiv>
-
-                      {pkg.descriptions.length !== 0 && (
-                        <ul className="space-y-3 mt-10 pl-2">
-                          {pkg.descriptions.map((desc, idx) => (
-                            <MotionDiv
-                              key={idx}
-                              variant="scaleFade"
-                              visibleOverride={{
-                                viewport: { once: true, amount: 0.6 },
-                                transition: {
-                                  duration: 0.6,
-                                  delay: index * 0.15,
-                                },
-                              }}
-                            >
-                              <li className="flex gap-2 items-start">
+                        >
+                          <div className="mb-5">
+                            {selectedMonth === 1 && (
+                              <div>
                                 <div
-                                  className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
-                                  style={{
-                                    backgroundColor: pkg.is_special
-                                      ? "rgb(255, 211, 0)"
-                                      : "var(--color-primary)",
-                                    color: "white",
-                                  }}
-                                >
-                                  <IoMdCheckmark />
-                                </div>
-                                <span
-                                  className="font-semibold text-xl"
+                                  className="flex items-center gap-1"
                                   style={{
                                     color: pkg.is_special
                                       ? "rgba(0, 0, 0, 0.8)"
                                       : "rgba(0, 0, 0, 1)",
                                   }}
                                 >
-                                  {desc}
-                                </span>
-                              </li>
-                            </MotionDiv>
-                          ))}
-                        </ul>
-                      )}
+                                  <p className="font-bold text-2xl">
+                                    {pkg.one_month_price_after_discount} جنيه
+                                  </p>
+                                  {!usdRate ? (
+                                    ""
+                                  ) : (
+                                    <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
+                                      <span>=</span>
+                                      <span>
+                                        {convertToUSD(
+                                          pkg.one_month_price_after_discount
+                                        )}{" "}
+                                        دولار
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                  {pkg.one_month_price_before_discount} جنيه
+                                </p>
+                              </div>
+                            )}
+                            {selectedMonth === 6 && (
+                              <div>
+                                <div
+                                  className="flex items-center gap-1"
+                                  style={{
+                                    color: pkg.is_special
+                                      ? "rgba(0, 0, 0, 0.8)"
+                                      : "rgba(0, 0, 0, 1)",
+                                  }}
+                                >
+                                  <p className="font-bold text-2xl">
+                                    {pkg.six_month_price_after_discount} جنيه
+                                  </p>
+                                  {!usdRate ? (
+                                    ""
+                                  ) : (
+                                    <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
+                                      <span>=</span>
+                                      <span>
+                                        {convertToUSD(
+                                          pkg.six_month_price_after_discount
+                                        )}{" "}
+                                        دولار
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                  {pkg.six_month_price_before_discount} جنيه
+                                </p>
+                              </div>
+                            )}
+                            {selectedMonth === 12 && (
+                              <div>
+                                <div
+                                  className="flex items-center gap-1"
+                                  style={{
+                                    color: pkg.is_special
+                                      ? "rgba(0, 0, 0, 0.8)"
+                                      : "rgba(0, 0, 0, 1)",
+                                  }}
+                                >
+                                  <p className="font-bold text-2xl">
+                                    {pkg.twelve_month_price_after_discount} جنيه
+                                  </p>
+                                  {!usdRate ? (
+                                    ""
+                                  ) : (
+                                    <div className="mt-1 flex items-center gap-1 font-semibold text-xl ">
+                                      <span>=</span>
+                                      <span>
+                                        {convertToUSD(
+                                          pkg.twelve_month_price_after_discount
+                                        )}{" "}
+                                        دولار
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                                <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                  {pkg.twelve_month_price_before_discount} جنيه
+                                </p>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="flex gap-2 my-2 mb-12">
+                            {[1, 6, 12].map((month) => (
+                              <button
+                                key={month}
+                                className={`pr-4 pl-4.5 pt-0.5 pb-2 rounded-lg`}
+                                style={{
+                                  boxShadow:
+                                    selectedMonth === month &&
+                                    pkg.is_special === false
+                                      ? " 0 10px 30px rgba(217, 252, 35, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08)"
+                                      : selectedMonth === month &&
+                                        pkg.is_special === true
+                                      ? " 0 8px 25px rgba(255, 211, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1)"
+                                      : "",
+                                  border:
+                                    selectedMonth === month &&
+                                    pkg.is_special === false
+                                      ? "1px solid rgba(180, 210, 30, 0.8)"
+                                      : selectedMonth === month &&
+                                        pkg.is_special === true
+                                      ? "1px solid #E6BE00"
+                                      : "1px solid #E0E0E0",
+                                  background:
+                                    selectedMonth === month &&
+                                    pkg.is_special === false
+                                      ? "var(--color-primary)"
+                                      : selectedMonth === month &&
+                                        pkg.is_special === true
+                                      ? "rgb(255, 211, 0)"
+                                      : "rgba(245, 245, 245, 0.7)",
+                                  cursor:
+                                    selectedMonth === month ? "" : "pointer",
+                                }}
+                                onClick={() => handleMonthChange(pkg.id, month)}
+                              >
+                                {month === 1
+                                  ? "شهر"
+                                  : month === 6
+                                  ? "6 شهور"
+                                  : "12 شهر"}
+                              </button>
+                            ))}
+                          </div>
+                        </MotionDiv>
+
+                        <MotionDiv
+                          variant="slideXRight"
+                          visibleOverride={{
+                            viewport: { once: true, amount: 1 },
+                            transition: { duration: 1 },
+                          }}
+                        >
+                          <Button
+                            text="الإشتراك فى الباقة"
+                            leftComponent={<Arrow backgroundColor={"white"} />}
+                            animateLeft="slide"
+                            animationDelay={index * 8}
+                            onClick={() => {
+                              onSelectPackage({
+                                ...pkg,
+                                selectedMonth,
+                              });
+                              window.lenis.scrollTo(0, {
+                                duration: 0.5,
+                              });
+                            }}
+                            className="py-4 font-bold w-full text-white text-lg gap-3"
+                            style={{ backgroundColor: "black" }}
+                          />
+                        </MotionDiv>
+
+                        {pkg.descriptions.length !== 0 && (
+                          <ul className="space-y-3 mt-10 pl-2">
+                            {pkg.descriptions.map((desc, idx) => (
+                              <MotionDiv
+                                key={idx}
+                                variant="scaleFade"
+                                visibleOverride={{
+                                  viewport: { once: true, amount: 0.6 },
+                                  transition: {
+                                    duration: 0.6,
+                                    delay: index * 0.15,
+                                  },
+                                }}
+                              >
+                                <li className="flex gap-2 items-start">
+                                  <div
+                                    className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
+                                    style={{
+                                      backgroundColor: pkg.is_special
+                                        ? "rgb(255, 211, 0)"
+                                        : "var(--color-primary)",
+                                      color: "white",
+                                    }}
+                                  >
+                                    <IoMdCheckmark />
+                                  </div>
+                                  <span
+                                    className="font-semibold text-xl"
+                                    style={{
+                                      color: pkg.is_special
+                                        ? "rgba(0, 0, 0, 0.8)"
+                                        : "rgba(0, 0, 0, 1)",
+                                    }}
+                                  >
+                                    {desc}
+                                  </span>
+                                </li>
+                              </MotionDiv>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
@@ -396,230 +415,249 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
 
               return (
                 <SwiperSlide key={pkg.id} className="packages-swiper-slide">
-                  <div
-                    className="package-box px-5 pt-8 pb-9 rounded-4xl transition-all duration-500 relative overflow-hidden"
-                    style={{
-                      border: pkg.is_special ? "" : "1px solid #E0E0E0",
-                      background: "white",
-                    }}
-                  >
-                    {pkg.is_special === true ? (
-                      <FogBackground className="z-0" />
+                  <div className="relative">
+                    {pkg.is_special ? (
+                      <Ribbon
+                        selectedMonth={selectedMonth}
+                        before1={pkg.one_month_price_before_discount}
+                        after1={pkg.one_month_price_after_discount}
+                        before6={pkg.six_month_price_before_discount}
+                        after6={pkg.six_month_price_after_discount}
+                        before12={pkg.twelve_month_price_before_discount}
+                        after12={pkg.twelve_month_price_after_discount}
+                      />
                     ) : (
                       ""
                     )}
-                    <div className="relative z-10">
-                      <h2
-                        className="text-3xl font-semibold mb-1.5"
-                        style={{
-                          color: pkg.is_special
-                            ? "rgba(0, 0, 0, 0.8)"
-                            : "rgba(0, 0, 0, 1)",
-                        }}
-                      >
-                        {pkg.name}
-                      </h2>
+                    <div
+                      className="package-box px-5 pt-8 pb-9 rounded-4xl transition-all duration-500 relative overflow-hidden"
+                      style={{
+                        border: pkg.is_special ? "" : "1px solid #E0E0E0",
+                        background: "white",
+                        paddingTop: pkg.is_special ? "65px" : "",
+                        paddingBottom: pkg.is_special ? "80px" : "",
+                      }}
+                    >
+                      {pkg.is_special === true ? (
+                        <FogBackground className="z-0" />
+                      ) : (
+                        ""
+                      )}
 
-                      <p
-                        style={{
-                          color: "rgba(102, 102, 102, 1)",
-                        }}
-                        className="text-lg font-normal mb-8"
-                      >
-                        {pkg.short_description}
-                      </p>
+                      <div className="relative z-10">
+                        <h2
+                          className="text-3xl font-semibold mb-1.5"
+                          style={{
+                            color: pkg.is_special
+                              ? "rgba(0, 0, 0, 0.8)"
+                              : "rgba(0, 0, 0, 1)",
+                          }}
+                        >
+                          {pkg.name}
+                        </h2>
 
-                      <div className="mb-5">
-                        {selectedMonth === 1 && (
-                          <div>
-                            <div
-                              className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
-                              style={{
-                                color: pkg.is_special
-                                  ? "rgba(0, 0, 0, 0.8)"
-                                  : "rgba(0, 0, 0, 1)",
-                              }}
-                            >
-                              <p className="font-bold text-2xl">
-                                {pkg.one_month_price_after_discount} جنيه
-                              </p>
-                              {!usdRate ? (
-                                ""
-                              ) : (
-                                <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
-                                  <span>=</span>
-                                  <span>
-                                    {convertToUSD(
-                                      pkg.one_month_price_after_discount
-                                    )}{" "}
-                                    دولار
-                                  </span>
-                                </div>
-                              )}
-                            </div>
+                        <p
+                          style={{
+                            color: "rgba(102, 102, 102, 1)",
+                          }}
+                          className="text-lg font-normal mb-8"
+                        >
+                          {pkg.short_description}
+                        </p>
 
-                            <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                              {pkg.one_month_price_before_discount} جنيه
-                            </p>
-                          </div>
-                        )}
-                        {selectedMonth === 6 && (
-                          <div>
-                            <div
-                              className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
-                              style={{
-                                color: pkg.is_special
-                                  ? "rgba(0, 0, 0, 0.8)"
-                                  : "rgba(0, 0, 0, 1)",
-                              }}
-                            >
-                              <p className="font-bold text-2xl">
-                                {pkg.six_month_price_after_discount} جنيه
-                              </p>
-                              {!usdRate ? (
-                                ""
-                              ) : (
-                                <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
-                                  <span>=</span>
-                                  <span>
-                                    {convertToUSD(
-                                      pkg.six_month_price_after_discount
-                                    )}{" "}
-                                    دولار
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                            <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                              {pkg.six_month_price_before_discount} جنيه
-                            </p>
-                          </div>
-                        )}
-                        {selectedMonth === 12 && (
-                          <div>
-                            <div
-                              className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
-                              style={{
-                                color: pkg.is_special
-                                  ? "rgba(0, 0, 0, 0.8)"
-                                  : "rgba(0, 0, 0, 1)",
-                              }}
-                            >
-                              <p className="font-bold text-2xl">
-                                {pkg.twelve_month_price_after_discount} جنيه
-                              </p>
-                              {!usdRate ? (
-                                ""
-                              ) : (
-                                <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
-                                  <span>=</span>
-                                  <span>
-                                    {convertToUSD(
-                                      pkg.twelve_month_price_after_discount
-                                    )}{" "}
-                                    دولار
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-
-                            <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
-                              {pkg.twelve_month_price_before_discount} جنيه
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex gap-2 my-2 mb-12">
-                        {[1, 6, 12].map((month) => (
-                          <button
-                            key={month}
-                            className={`pr-2.5 2xs:pr-4 pl-3 2xs:pl-4.5 pt-0.5 pb-2 rounded-lg`}
-                            style={{
-                              boxShadow:
-                                selectedMonth === month &&
-                                pkg.is_special === false
-                                  ? " 0 10px 30px rgba(217, 252, 35, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08)"
-                                  : selectedMonth === month &&
-                                    pkg.is_special === true
-                                  ? " 0 8px 25px rgba(255, 211, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1)"
-                                  : "",
-                              border:
-                                selectedMonth === month &&
-                                pkg.is_special === false
-                                  ? "1px solid rgba(180, 210, 30, 0.8)"
-                                  : selectedMonth === month &&
-                                    pkg.is_special === true
-                                  ? "1px solid #E6BE00"
-                                  : "1px solid #E0E0E0",
-                              background:
-                                selectedMonth === month &&
-                                pkg.is_special === false
-                                  ? "var(--color-primary)"
-                                  : selectedMonth === month &&
-                                    pkg.is_special === true
-                                  ? "rgb(255, 211, 0)"
-                                  : "rgba(245, 245, 245, 0.7)",
-                              cursor: selectedMonth === month ? "" : "pointer",
-                            }}
-                            onClick={() => handleMonthChange(pkg.id, month)}
-                          >
-                            {month === 1
-                              ? "شهر"
-                              : month === 6
-                              ? "6 شهور"
-                              : "12 شهر"}
-                          </button>
-                        ))}
-                      </div>
-
-                      <Button
-                        text="الإشتراك فى الباقة"
-                        leftComponent={<Arrow backgroundColor={"white"} />}
-                        animateLeft="slide"
-                        animationDelay={index * 8}
-                        onClick={() => {
-                          onSelectPackage({
-                            ...pkg,
-                            selectedMonth,
-                          });
-                          window.lenis.scrollTo(0, {
-                            duration: 0.5,
-                          });
-                        }}
-                        className="py-4 font-bold w-full text-white 2xs:text-lg gap-3"
-                        style={{ backgroundColor: "black" }}
-                      />
-
-                      {pkg.descriptions.length !== 0 && (
-                        <ul className="space-y-3 mt-10 pl-2">
-                          {pkg.descriptions.map((desc, idx) => (
-                            <li className="flex gap-2 items-start" key={idx}>
+                        <div className="mb-5">
+                          {selectedMonth === 1 && (
+                            <div>
                               <div
-                                className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
-                                style={{
-                                  backgroundColor: pkg.is_special
-                                    ? "rgb(255, 211, 0)"
-                                    : "var(--color-primary)",
-                                  color: "white",
-                                }}
-                              >
-                                <IoMdCheckmark />
-                              </div>
-                              <span
-                                className="font-semibold text-xl"
+                                className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
                                 style={{
                                   color: pkg.is_special
                                     ? "rgba(0, 0, 0, 0.8)"
                                     : "rgba(0, 0, 0, 1)",
                                 }}
                               >
-                                {desc}
-                              </span>
-                            </li>
+                                <p className="font-bold text-2xl">
+                                  {pkg.one_month_price_after_discount} جنيه
+                                </p>
+                                {!usdRate ? (
+                                  ""
+                                ) : (
+                                  <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
+                                    <span>=</span>
+                                    <span>
+                                      {convertToUSD(
+                                        pkg.one_month_price_after_discount
+                                      )}{" "}
+                                      دولار
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+
+                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                {pkg.one_month_price_before_discount} جنيه
+                              </p>
+                            </div>
+                          )}
+                          {selectedMonth === 6 && (
+                            <div>
+                              <div
+                                className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
+                                style={{
+                                  color: pkg.is_special
+                                    ? "rgba(0, 0, 0, 0.8)"
+                                    : "rgba(0, 0, 0, 1)",
+                                }}
+                              >
+                                <p className="font-bold text-2xl">
+                                  {pkg.six_month_price_after_discount} جنيه
+                                </p>
+                                {!usdRate ? (
+                                  ""
+                                ) : (
+                                  <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
+                                    <span>=</span>
+                                    <span>
+                                      {convertToUSD(
+                                        pkg.six_month_price_after_discount
+                                      )}{" "}
+                                      دولار
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                {pkg.six_month_price_before_discount} جنيه
+                              </p>
+                            </div>
+                          )}
+                          {selectedMonth === 12 && (
+                            <div>
+                              <div
+                                className="flex xs:items-center xs:gap-1 xs:flex-row flex-col mb-2"
+                                style={{
+                                  color: pkg.is_special
+                                    ? "rgba(0, 0, 0, 0.8)"
+                                    : "rgba(0, 0, 0, 1)",
+                                }}
+                              >
+                                <p className="font-bold text-2xl">
+                                  {pkg.twelve_month_price_after_discount} جنيه
+                                </p>
+                                {!usdRate ? (
+                                  ""
+                                ) : (
+                                  <div className="xs:mt-1 flex items-center gap-1 font-normal 2xs:font-semibold 2xs:text-xl">
+                                    <span>=</span>
+                                    <span>
+                                      {convertToUSD(
+                                        pkg.twelve_month_price_after_discount
+                                      )}{" "}
+                                      دولار
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+
+                              <p className="line-through text-gray-500 font-semibold text-[0.95rem]">
+                                {pkg.twelve_month_price_before_discount} جنيه
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex gap-2 my-2 mb-12">
+                          {[1, 6, 12].map((month) => (
+                            <button
+                              key={month}
+                              className={`pr-2.5 2xs:pr-4 pl-3 2xs:pl-4.5 pt-0.5 pb-2 rounded-lg`}
+                              style={{
+                                boxShadow:
+                                  selectedMonth === month &&
+                                  pkg.is_special === false
+                                    ? " 0 10px 30px rgba(217, 252, 35, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08)"
+                                    : selectedMonth === month &&
+                                      pkg.is_special === true
+                                    ? " 0 8px 25px rgba(255, 211, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.1)"
+                                    : "",
+                                border:
+                                  selectedMonth === month &&
+                                  pkg.is_special === false
+                                    ? "1px solid rgba(180, 210, 30, 0.8)"
+                                    : selectedMonth === month &&
+                                      pkg.is_special === true
+                                    ? "1px solid #E6BE00"
+                                    : "1px solid #E0E0E0",
+                                background:
+                                  selectedMonth === month &&
+                                  pkg.is_special === false
+                                    ? "var(--color-primary)"
+                                    : selectedMonth === month &&
+                                      pkg.is_special === true
+                                    ? "rgb(255, 211, 0)"
+                                    : "rgba(245, 245, 245, 0.7)",
+                                cursor:
+                                  selectedMonth === month ? "" : "pointer",
+                              }}
+                              onClick={() => handleMonthChange(pkg.id, month)}
+                            >
+                              {month === 1
+                                ? "شهر"
+                                : month === 6
+                                ? "6 شهور"
+                                : "12 شهر"}
+                            </button>
                           ))}
-                        </ul>
-                      )}
+                        </div>
+
+                        <Button
+                          text="الإشتراك فى الباقة"
+                          leftComponent={<Arrow backgroundColor={"white"} />}
+                          animateLeft="slide"
+                          animationDelay={index * 8}
+                          onClick={() => {
+                            onSelectPackage({
+                              ...pkg,
+                              selectedMonth,
+                            });
+                            window.lenis.scrollTo(0, {
+                              duration: 0.5,
+                            });
+                          }}
+                          className="py-4 font-bold w-full text-white 2xs:text-lg gap-3"
+                          style={{ backgroundColor: "black" }}
+                        />
+
+                        {pkg.descriptions.length !== 0 && (
+                          <ul className="space-y-3 mt-10 pl-2">
+                            {pkg.descriptions.map((desc, idx) => (
+                              <li className="flex gap-2 items-start" key={idx}>
+                                <div
+                                  className="w-7 h-7 rounded-full shrink-0 flex justify-center items-center mt-0.5 text-xl"
+                                  style={{
+                                    backgroundColor: pkg.is_special
+                                      ? "rgb(255, 211, 0)"
+                                      : "var(--color-primary)",
+                                    color: "white",
+                                  }}
+                                >
+                                  <IoMdCheckmark />
+                                </div>
+                                <span
+                                  className="font-semibold text-xl"
+                                  style={{
+                                    color: pkg.is_special
+                                      ? "rgba(0, 0, 0, 0.8)"
+                                      : "rgba(0, 0, 0, 1)",
+                                  }}
+                                >
+                                  {desc}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </SwiperSlide>

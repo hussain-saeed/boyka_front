@@ -81,7 +81,7 @@ function App() {
         <div
           style={{
             background: selectedPackage
-              ? "linear-gradient(360deg, rgba(217, 252, 35, 0.8) 0%, rgba(217, 252, 35, 0.5) 100%)"
+              ? "linear-gradient(220deg, rgba(217, 252, 35, 1) 0%, rgba(245, 255, 180, 50%) 60%, rgba(255, 255, 255, 1) 100%)"
               : "var(--color-bg)",
             position: "relative",
           }}
