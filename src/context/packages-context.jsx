@@ -95,6 +95,7 @@ export function PackagesProvider({ children }) {
       twelve_month_price_after_discount: "7000.00",
       is_active: true,
       updated_at: "2025-12-26T14:45:32.445566+02:00",
+      is_special: false,
     },
     {
       id: 4,
