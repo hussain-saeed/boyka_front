@@ -62,7 +62,7 @@ export default function Packages({ onSelectPackage, convertToUSD, usdRate }) {
                 const selectedMonth = selectedMonths[pkg.id] || 1;
 
                 return (
-                  <div className="relative">
+                  <div className="relative" key={index}>
                     {pkg.is_special ? (
                       <Ribbon
                         selectedMonth={selectedMonth}
